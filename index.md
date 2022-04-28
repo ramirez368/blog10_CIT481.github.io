@@ -48,10 +48,8 @@ steps do the actual work. In the example above the steps just printed messages. 
 
 messages. A more useful build step might look like the following:
 
-<mark >
 pipeline {
     agent any
-
     stages {
         stage(‘Build’) {
             steps {
@@ -61,10 +59,10 @@ pipeline {
         }
     }
 }
-</mark>
 
 
-![](https://www.infoworld.com/article/3239666/what-is-jenkins-the-ci-server-explained.html#:~:text=pipeline%20%7B%0A%C2%A0%C2%A0%C2%A0%20agent%20any%0A%0A%C2%A0%C2%A0%C2%A0%20stages%20%7B%0A%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%20stage(%E2%80%98Build%E2%80%99)%20%7B%0A%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%20steps%20%7B%0A%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%20sh%20%E2%80%98make%E2%80%99%0A%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20archiveArtifacts%20artifacts%3A%20%E2%80%98**/target/*.jar%E2%80%99%2C%20fingerprint%3A%20true%0A%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%20%7D%0A%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%20%7D%0A%C2%A0%C2%A0%C2%A0%20%7D%0A%7D)
+
+https://www.infoworld.com/article/3239666/what-is-jenkins-the-ci-server-explained.html#:~:text=pipeline%20%7B%0A%C2%A0%C2%A0%C2%A0%20agent%20any%0A%0A%C2%A0%C2%A0%C2%A0%20stages%20%7B%0A%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%20stage(%E2%80%98Build%E2%80%99)%20%7B%0A%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%20steps%20%7B%0A%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%20sh%20%E2%80%98make%E2%80%99%0A%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20archiveArtifacts%20artifacts%3A%20%E2%80%98**/target/*.jar%E2%80%99%2C%20fingerprint%3A%20true%0A%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%20%7D%0A%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%C2%A0%20%7D%0A%C2%A0%C2%A0%C2%A0%20%7D%0A%7D
 
 Here we are invoking make from a shell, and then archiving any produced JAR files to the Jenkins archive.
 
