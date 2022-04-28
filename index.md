@@ -46,8 +46,6 @@ stages contain a sequence of one or more stage directives. In the example above,
 
 steps do the actual work. In the example above the steps just printed messages. A more useful build step might look like the following:
 
-messages. A more useful build step might look like the following:
-
 ```
 pipeline {
     agent any
@@ -67,10 +65,54 @@ Here we are invoking make from a shell, and then archiving any produced JAR file
 The post section defines actions that will be run at the end of the pipeline run or stage. You can use a number of post-condition blocks within the post section: always, changed, failure, success, unstable, and aborted.
 
 For example, the Jenkinsfile below always runs JUnit after the Test stage, but only sends an email if the pipeline fails.
-
-
+```
+pipeline {
+    agent any
+    stages {
+        stage(‘Test’) {
+            steps {
+                sh ‘make check’
+            }
+        }
+    }
+    post {
+        always {
+            junit ‘**/target/*.xml’
+        }
+        failure {
+            mail to: team@example.com, subject: ‘The Pipeline failed :(‘
+        }
+    }
+}
+```
 The declarative pipeline can express most of what you need to define pipelines, and is much easier to learn than the scripted pipeline syntax, which is a Groovy-based DSL. The scripted pipeline is in fact a full-blown programming environment.
 
+For comparison, the following two Jenkinsfiles are completely equivalent
+## Declarative pipeline
+```
+pipeline {
+    agent { docker ‘node:6.3’ }
+    stages {
+        stage(‘build’) {
+            steps {
+                sh ‘npm —version’
+            }
+        }
+    }
+} 
+```
+## Scripted pipeline
+```
+node(‘docker’) {
+    checkout scm
+    stage(‘Build’) {
+        docker.image(‘node:6.3’).inside {
+            sh ‘npm —version’
+        }
+    }
+}
+```
+```
 ### I hope this was useful as IoT get deeper and deeper in our lifes.
 
 
