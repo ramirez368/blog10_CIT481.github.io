@@ -40,54 +40,21 @@ Jenkins pipelines can be declarative or scripted. A declarative pipeline, the si
 
 pipeline is the mandatory outer block to invoke the Jenkins pipeline plugin. agent defines where you want to run the pipeline. any says to use any available agent to run the pipeline or stage. A more specific agent might declare a container to use, for example:
 
-agent {
-    docker {
-        image ‘maven:3-alpine’
-        label ‘my-defined-label’
-        args  ‘-v /tmp:/tmp’
-    }
-}
+![test](assets/img/code1.PNG)
 
 stages contain a sequence of one or more stage directives. In the example above, the three stages are Build, Test, and Deploy.
 
 steps do the actual work. In the example above the steps just printed messages. A more useful build step might look like the following:
 
-pipeline {
-    agent any
+![test](assets/img/code2.PNG)
 
-    stages {
-        stage(‘Build’) {
-            steps {
-                sh ‘make’
-                archiveArtifacts artifacts: ‘**/target/*.jar’, fingerprint: true
-            }
-        }
-    }
-}
 Here we are invoking make from a shell, and then archiving any produced JAR files to the Jenkins archive.
 
 The post section defines actions that will be run at the end of the pipeline run or stage. You can use a number of post-condition blocks within the post section: always, changed, failure, success, unstable, and aborted.
 
 For example, the Jenkinsfile below always runs JUnit after the Test stage, but only sends an email if the pipeline fails.
 
-pipeline {
-    agent any
-    stages {
-        stage(‘Test’) {
-            steps {
-                sh ‘make check’
-            }
-        }
-    }
-    post {
-        always {
-            junit ‘**/target/*.xml’
-        }
-        failure {
-            mail to: team@example.com, subject: ‘The Pipeline failed :(‘
-        }
-    }
-}
+
 The declarative pipeline can express most of what you need to define pipelines, and is much easier to learn than the scripted pipeline syntax, which is a Groovy-based DSL. The scripted pipeline is in fact a full-blown programming environment.
 
 ### I hope this was useful as IoT get deeper and deeper in our lifes.
