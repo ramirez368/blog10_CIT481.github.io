@@ -57,6 +57,8 @@ pipeline {
         }
     }
 }
+
+
 pipeline is the mandatory outer block to invoke the Jenkins pipeline plugin. agent defines where you want to run the pipeline. any says to use any available agent to run the pipeline or stage. A more specific agent might declare a container to use, for example:
 
 agent {
