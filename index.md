@@ -35,13 +35,39 @@ Once you have Jenkins configured, it’s time to create some projects that Jenki
 As you can see, branch sources for this kind of pipeline in my basic Jenkins installation can be Git or Subversion repositories, including GitHub. If you need other kinds of repositories or different online repository services, it’s just a matter of adding the appropriate plug-ins and rebooting Jenkins. I tried, but couldn’t think of a source code management system (SCM) that doesn’t already have a Jenkins plug-in listed.
 
 Jenkins pipelines can be declarative or scripted. A declarative pipeline, the simpler of the two, uses Groovy-compatible syntax—and if you want, you can start the file with #!groovy to point your code editor in the right direction. A declarative pipeline starts with a pipeline block, defines an agent, and defines stages that include executable steps, as in the three-stage example below.
+```
+pipeline {
+    agent any
 
-![test](assets/img/code.PNG)
-
+    stages {
+        stage(‘Build’) {
+            steps {
+                echo ‘Building..’
+            }
+        }
+        stage(‘Test’) {
+            steps {
+                echo ‘Testing..’
+            }
+        }
+        stage(‘Deploy’) {
+            steps {
+                echo ‘Deploying....’
+            }
+        }
+    }
+}
+```
 pipeline is the mandatory outer block to invoke the Jenkins pipeline plugin. agent defines where you want to run the pipeline. any says to use any available agent to run the pipeline or stage. A more specific agent might declare a container to use, for example:
-
-![test1](assets/img/code2.PNG)
-
+```
+agent {
+    docker {
+        image ‘maven:3-alpine’
+        label ‘my-defined-label’
+        args  ‘-v /tmp:/tmp’
+    }
+}
+```
 stages contain a sequence of one or more stage directives. In the example above, the three stages are Build, Test, and Deploy.
 
 steps do the actual work. In the example above the steps just printed messages. A more useful build step might look like the following:
