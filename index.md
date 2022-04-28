@@ -48,6 +48,7 @@ steps do the actual work. In the example above the steps just printed messages. 
 
 messages. A more useful build step might look like the following:
 
+<mark >
 pipeline {
     agent any
 
@@ -60,7 +61,7 @@ pipeline {
         }
     }
 }
-
+</mark>
 Here we are invoking make from a shell, and then archiving any produced JAR files to the Jenkins archive.
 
 The post section defines actions that will be run at the end of the pipeline run or stage. You can use a number of post-condition blocks within the post section: always, changed, failure, success, unstable, and aborted.
