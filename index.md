@@ -46,7 +46,18 @@ stages contain a sequence of one or more stage directives. In the example above,
 
 steps do the actual work. In the example above the steps just printed messages. A more useful build step might look like the following:
 
-![test2](assets/img/code3.PNG)
+pipeline {
+    agent any
+
+    stages {
+        stage(‘Build’) {
+            steps {
+                sh ‘make’
+                archiveArtifacts artifacts: ‘**/target/*.jar’, fingerprint: true
+            }
+        }
+    }
+}
 
 Here we are invoking make from a shell, and then archiving any produced JAR files to the Jenkins archive.
 
