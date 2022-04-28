@@ -40,13 +40,13 @@ Jenkins pipelines can be declarative or scripted. A declarative pipeline, the si
 
 pipeline is the mandatory outer block to invoke the Jenkins pipeline plugin. agent defines where you want to run the pipeline. any says to use any available agent to run the pipeline or stage. A more specific agent might declare a container to use, for example:
 
-![test](assets/img/code1.PNG)
+![test1](assets/img/code1.PNG)
 
 stages contain a sequence of one or more stage directives. In the example above, the three stages are Build, Test, and Deploy.
 
 steps do the actual work. In the example above the steps just printed messages. A more useful build step might look like the following:
 
-![test](assets/img/code2.PNG)
+![test2](assets/img/code2.PNG)
 
 Here we are invoking make from a shell, and then archiving any produced JAR files to the Jenkins archive.
 
