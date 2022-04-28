@@ -45,6 +45,7 @@ pipeline is the mandatory outer block to invoke the Jenkins pipeline plugin. age
 stages contain a sequence of one or more stage directives. In the example above, the three stages are Build, Test, and Deploy.
 
 steps do the actual work. In the example above the steps just printed messages. A more useful build step might look like the following:
+
 pipeline {
     agent any
 
