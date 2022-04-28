@@ -36,7 +36,7 @@ As you can see, branch sources for this kind of pipeline in my basic Jenkins ins
 
 Jenkins pipelines can be declarative or scripted. A declarative pipeline, the simpler of the two, uses Groovy-compatible syntax—and if you want, you can start the file with #!groovy to point your code editor in the right direction. A declarative pipeline starts with a pipeline block, defines an agent, and defines stages that include executable steps, as in the three-stage example below.
 
-![](code.png)
+![test](assets/img/code.PNG)
 
 pipeline is the mandatory outer block to invoke the Jenkins pipeline plugin. agent defines where you want to run the pipeline. any says to use any available agent to run the pipeline or stage. A more specific agent might declare a container to use, for example:
 
