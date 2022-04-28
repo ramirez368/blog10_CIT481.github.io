@@ -48,7 +48,8 @@ steps do the actual work. In the example above the steps just printed messages. 
 
 messages. A more useful build step might look like the following:
 
-`pipeline {
+```
+pipeline {
     agent any
     stages {
         stage(‘Build’) {
@@ -59,7 +60,7 @@ messages. A more useful build step might look like the following:
         }
     }
 }
-`
+```
 
 Here we are invoking make from a shell, and then archiving any produced JAR files to the Jenkins archive.
 
